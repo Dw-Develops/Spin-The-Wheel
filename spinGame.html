@@ -18,18 +18,68 @@
 
 </head>
 
-<body>
-   
-    <h1>Spin The Wheel And Win!</h1>
-	
-	<iframe src="https://giphy.com/embed/nntpMqUaen7Nu" width="280" height="217" frameBorder="0" class="giphy-embed"></iframe><p><a href="https://giphy.com/gifs/spinning-nntpMqUaen7Nu">via GIPHY</a></p>
+<audio id="sound1">
+  <source src="spinning_coin_2.mp3" type="audio/mp3">
+</audio>
 
-<h2>Click Here to Spin the Wheel</h2>
+
+<body onload='hide()'>
+   
+    <h1 id='t1'>Spin The Wheel And Win!</h1>
+	
+	<img src="prizeWheel2.GIF" width='200px' height='200px'>
+	<h2 id='ui1'>Enter Your Email To Play!</h2>
+	<form id="postForm">
+	    <input type="text" name="email" id="email1">
+		<input type="submit" value="Submit" id='go'>
+
+	</form>
+	
+<h2 id='title'>Click Here to Spin the Wheel</h2>
 <button id='spin', onclick='spinWheel()'>Spin Now!</button>
 <h3 id='results'>Spin Results</h3>
 
 
     <script>
+	
+	//Declare the audio file as a variable
+	var x = document.getElementById('sound1');
+	
+	//Hide the spin button and spin invite title when the page loads
+	function hide() {
+	  document.getElementById("spin").style.visibility = "hidden"; 
+	  document.getElementById("results").style.visibility = "hidden"; 
+	  document.getElementById("title").style.visibility = "hidden"; 
+	}
+	
+	//Form Logic
+	    //Post email entry to the database
+		document.getElementById('postForm').addEventListener('submit', postEmail);
+		
+
+		 function postEmail(e) {
+		e.preventDefault();
+
+		document.getElementById("spin").style.visibility = "visible"; 
+	    document.getElementById("results").style.visibility = "visible"; 
+		document.getElementById("title").style.visibility = "visible";
+		document.getElementById("ui1").style.visibility = "hidden"; 
+		document.getElementById("postForm").style.visibility = "hidden"; 
+		
+		var email = document.getElementById('email1').value;
+		var params= "email="+email;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'process.php', true);
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                console.log(this.responseText);
+            }
+            xhr.send(params);
+        }
+
+	
+	// Wheel Logic
 	
 	//Create an array of prizes
 	
@@ -48,12 +98,13 @@
 		'Prize 12!',
 		'Prize 13!'
 	];
-	    //Trigger function when the button is clicked
+	    //Trigger function when the button is clicked -- Spin the wheel
 
 var spinWheel = function() {
-
+        
     //Hide the Spin button so users can't multi press and impede app logic
 	document.getElementById("spin").style.visibility = "hidden"; 
+	document.getElementById("title").style.visibility = "hidden"; 
 
   //Create an Empty Variable thats local to this function
   let num = "";
@@ -68,21 +119,41 @@ var spinWheel = function() {
 	  for(i = 0; i < prizes.length && i !== num; i++) {
 	  
 	  //Set placeholder text so users know the game is working
-	  
 	    document.getElementById('results').innerHTML = "Spinning......";
 		
+		//Play audio file
+		  x.play();
+		  
 		// Set a short timer to indicate that the wheel is spinning
-	      timer = setTimeout(winner, 3000);
+	      timer = setTimeout(winner, 5000);
 		}
 		
 	    
 			  //Display spin results
 			 function winner() {
 			  document.getElementById('results').innerHTML = "You Win " + prizes[i]; 
-                document.getElementById("spin").style.visibility = "visible"; 			  
+			  
+                			  
 			  }
+			  postResults();
 }
 
+             //Post results data to the database
+    		 function postResults() {
+		
+		
+		var results = prizes[i];
+		console.log(prizes[i]);
+		var params= "results="+results;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'process.php', true);
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                console.log(this.responseText);
+            }
+            xhr.send(params);
+        }
 
 	</script>
 
