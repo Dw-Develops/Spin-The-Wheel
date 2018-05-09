@@ -99,6 +99,8 @@
 		'Prize 12!',
 		'Prize 13!'
 	];
+	  // Declare luck variable
+	    var luck = "";
 	    //Trigger function when the button is clicked -- Spin the wheel
 
 var spinWheel = function() {
@@ -111,40 +113,120 @@ var spinWheel = function() {
   let num = "";
   
     //Generate random number
-   num = Math.floor(Math.random() *12 +1);
+   num = Math.floor(Math.random() *99);
      console.log(num);
 	 
+	  
+		 
 	
-    
-	//Loop through the array using a for loop
-	  for(i = 0; i < prizes.length && i !== num; i++) {
+   
+	//Use if else statements to assign an array position to a 
+	//percentage of a generated random number (num)
+	  if(num > 0 && num < 45) {
+	    // assign value to luck variable
+		luck = prizes[0];
 	  
 	  //Set placeholder text so users know the game is working
 	    document.getElementById('results').innerHTML = "Spinning......";
-		
+		   
 		//Play audio file
 		  x.play();
 		  
 		// Set a short timer to indicate that the wheel is spinning
 	      timer = setTimeout(winner, 5000);
 		}
+		else if(num > 45 && num < 66) {
+		// assign value to luck variable
+		luck = prizes[1];
+		
+	  //Set placeholder text so users know the game is working
+	    document.getElementById('results').innerHTML = "Spinning......";
+		    
+		//Play audio file
+		  x.play();
+		  
+		// Set a short timer to indicate that the wheel is spinning
+	      timer = setTimeout(winner, 5000);
+		}
+		else if(num > 66 && num < 81) {
+		// assign value to luck variable
+		luck = prizes[2];
+		
+	  //Set placeholder text so users know the game is working
+	    document.getElementById('results').innerHTML = "Spinning......";
+		    
+		//Play audio file
+		  x.play();
+		  
+		// Set a short timer to indicate that the wheel is spinning
+	      timer = setTimeout(winner, 5000);
+		}
+		else if(num > 81 && num < 91) {
+		// assign value to luck variable
+		luck = prizes[3];
+		
+	  //Set placeholder text so users know the game is working
+	    document.getElementById('results').innerHTML = "Spinning......";
+		    
+		//Play audio file
+		  x.play();
+		  
+		// Set a short timer to indicate that the wheel is spinning
+	      timer = setTimeout(winner, 5000);
+		}
+		else if(num > 91 && num < 97) {
+		// assign value to luck variable
+		luck = prizes[4];
+		
+	  //Set placeholder text so users know the game is working
+	    document.getElementById('results').innerHTML = "Spinning......";
+		    
+		//Play audio file
+		  x.play();
+		  
+		// Set a short timer to indicate that the wheel is spinning
+	      timer = setTimeout(winner, 5000);
+		}
+		else if(num > 0 && num < 7) {
+		// assign value to luck variable
+		luck = prizes[5];
+		
+	  //Set placeholder text so users know the game is working
+	    document.getElementById('results').innerHTML = "Spinning......";
+		   
+		//Play audio file
+		  x.play();
+		  
+		// Set a short timer to indicate that the wheel is spinning
+	      timer = setTimeout(winner, 5000);
+		}
+		else {
+		    document.getElementById('results').innerHTML = "Error......";
+		}
+		
+		
+		
+		
+		
 		
 	    
 			  //Display spin results
 			 function winner() {
-			  document.getElementById('results').innerHTML = "You Win " + prizes[i]; 
+			  document.getElementById('results').innerHTML = "You Win " + luck; 
 			  
                 			  
 			  }
 			  postResults();
 }
 
+
+
              //Post results data to the database
     		 function postResults() {
 		
 		
-		var results = prizes[i];
-		console.log(prizes[i]);
+		var results = luck;
+		
 		var params= "results="+results;
 
             var xhr = new XMLHttpRequest();
