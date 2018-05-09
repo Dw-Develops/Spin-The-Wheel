@@ -15,6 +15,10 @@
       body {
   text-align: center;
     }
+	
+	#bucks {
+	margin-left: 70%;
+	}
   </style>
 
 </head>
@@ -23,12 +27,23 @@
   <source src="spinning_coin_2.mp3" type="audio/mp3">
 </audio>
 
+<audio id="sound2">
+  <source src="win.mp3" type="audio/mp3">
+</audio>
+
+<audio id="sound3">
+  <source src="lose.mp3" type="audio/mp3">
+</audio>
+
 
 <body onload='hide()'>
    
-    <h1 id='t1'>Spin The Wheel And Win!</h1>
-	
-	<img src="prizeWheel2.GIF" width='200px' height='200px'>
+    <h1 id='t1'>Spin And Win With 100 Free Site Bucks!</h1>
+	<h3 id='bucks'>Site Bucky's: </h3>
+	</h1>
+	<h3 id="ui">1 Site Buck Per Play</h3>
+	<h2 id="showBonus"></h2>
+	<img src="prizeWheel2.GIF" width='350px' height='200px'>
 	<h2 id='ui1'>Enter Your Email To Play!</h2>
 	<form id="postForm">
 	    <input type="text" name="email" id="email1">
@@ -45,6 +60,8 @@
 	
 	//Declare the audio file as a variable
 	var x = document.getElementById('sound1');
+	var y = document.getElementById('sound2');
+	var z = document.getElementById('sound3');
 	
 	//Hide the spin button and spin invite title when the page loads
 	function hide() {
@@ -52,6 +69,7 @@
 	  document.getElementById("spin").style.visibility = "hidden"; 
 	  document.getElementById("results").style.visibility = "hidden"; 
 	  document.getElementById("title").style.visibility = "hidden"; 
+	 
 	}
 	
 	//Form Logic
@@ -63,7 +81,7 @@
 		e.preventDefault();
 
 		document.getElementById("spin").style.visibility = "visible"; 
-	    document.getElementById("results").style.visibility = "visible"; 
+	    //document.getElementById("results").style.visibility = "visible"; 
 		document.getElementById("title").style.visibility = "visible";
 		document.getElementById("ui1").style.visibility = "hidden"; 
 		document.getElementById("postForm").style.visibility = "hidden"; 
@@ -78,6 +96,7 @@
                 console.log(this.responseText);
             }
             xhr.send(params);
+			 document.getElementById('bucks').innerHTML = "Site Bucks: " + siteBucks;
         }
 
 	
@@ -86,25 +105,25 @@
 	//Create an array of prizes
 	
 	var prizes = [
-	    'Prize 1!',
-		'Prize 2!',
-		'Prize 3!',
-		'Prize 4!',
-		'Prize 5!',
-		'Prize 6!',
-		'Prize 7!',
-		'Prize 8!',
-		'Prize 9!',
-		'Prize 10!',
-		'Prize 11!',
-		'Prize 12!',
-		'Prize 13!'
+	   -1,
+	   2,
+	   5,
+	   -5,
+	   10,
+	   -15,
+	   20
+	   
+	   
+		
+		
 	];
 	    //Trigger function when the button is clicked -- Spin the wheel
     var luck = "";
-	
+	var siteBucks= 100;
+	var bonus = false;
+	 
 var spinWheel = function() {
-        
+        siteBucks = siteBucks - 1;
     //Hide the Spin button so users can't multi press and impede app logic
 	document.getElementById("spin").style.visibility = "hidden"; 
 	document.getElementById("title").style.visibility = "hidden"; 
@@ -117,7 +136,13 @@ var spinWheel = function() {
      console.log(num);
 	 
 	  
+		 if(num > 75) {
+		    bonus = true;
+		 } else if(num < 85) {
+		    bonus = false;
+		 } else {
 		 
+		 }
 	
    
 	//Use if else statements to assign an array position to a 
@@ -127,7 +152,7 @@ var spinWheel = function() {
 		luck = prizes[0];
 	  
 	  //Set placeholder text so users know the game is working
-	    document.getElementById('results').innerHTML = "Spinning......";
+	    document.getElementById('ui').innerHTML = "Spinning......";
 		   
 		//Play audio file
 		  x.play();
@@ -140,7 +165,7 @@ var spinWheel = function() {
 		luck = prizes[1];
 		
 	  //Set placeholder text so users know the game is working
-	    document.getElementById('results').innerHTML = "Spinning......";
+	    document.getElementById('ui').innerHTML = "Spinning......";
 		    
 		//Play audio file
 		  x.play();
@@ -153,7 +178,7 @@ var spinWheel = function() {
 		luck = prizes[2];
 		
 	  //Set placeholder text so users know the game is working
-	    document.getElementById('results').innerHTML = "Spinning......";
+	    document.getElementById('ui').innerHTML = "Spinning......";
 		    
 		//Play audio file
 		  x.play();
@@ -166,7 +191,7 @@ var spinWheel = function() {
 		luck = prizes[3];
 		
 	  //Set placeholder text so users know the game is working
-	    document.getElementById('results').innerHTML = "Spinning......";
+	    document.getElementById('ui').innerHTML = "Spinning......";
 		    
 		//Play audio file
 		  x.play();
@@ -179,7 +204,7 @@ var spinWheel = function() {
 		luck = prizes[4];
 		
 	  //Set placeholder text so users know the game is working
-	    document.getElementById('results').innerHTML = "Spinning......";
+	    document.getElementById('ui').innerHTML = "Spinning......";
 		    
 		//Play audio file
 		  x.play();
@@ -187,12 +212,12 @@ var spinWheel = function() {
 		// Set a short timer to indicate that the wheel is spinning
 	      timer = setTimeout(winner, 5000);
 		}
-		else if(num > 0 && num < 7) {
+		else if(num > 96 && num < 100) {
 		// assign value to luck variable
 		luck = prizes[5];
 		
 	  //Set placeholder text so users know the game is working
-	    document.getElementById('results').innerHTML = "Spinning......";
+	    document.getElementById('ui').innerHTML = "Spinning......";
 		   
 		//Play audio file
 		  x.play();
@@ -201,7 +226,7 @@ var spinWheel = function() {
 	      timer = setTimeout(winner, 5000);
 		}
 		else {
-		    document.getElementById('results').innerHTML = "Error......";
+		    document.getElementById('ui').innerHTML = prizes[6];;
 		}
 		
 		
@@ -212,19 +237,41 @@ var spinWheel = function() {
 	    
 			  //Display spin results
 			 function winner() {
-			  document.getElementById('results').innerHTML = "You Win " + luck; 
+			 if(bonus === true && luck > 0) {
+			     luck = luck *5;
+				 siteBucks = siteBucks + luck;
+				 document.getElementById('showBonus').innerHTML = "Bonus Money!";
+				 document.getElementById('ui').innerHTML = siteBucks;
+			 } else {
+			     siteBucks = siteBucks + luck;
+			 }
+			    
+			      document.getElementById('bucks').innerHTML = "Site Bucks: " + siteBucks;
+			 if(luck < 0) {
+			       z.play();
+				   document.getElementById('ui').innerHTML = "You Lost " + luck + " Site Bucks!";
+			    } else if(luck > 1) {
+				
+				y.play();
+				document.getElementById('ui').innerHTML = "You Won " + luck + " Site Bucks!";
+				} 
+			   
 			  
-                			  
+                	
+                    				
 			  }
-			  postResults();
+			  timer = setTimeout(postResults, 6500);
+			  //postResults();
 }
 
 
 
              //Post results data to the database
     		 function postResults() {
-		     
-		
+		        document.getElementById('showBonus').innerHTML = " ";
+		        document.getElementById("spin").style.visibility = "visible";
+                     document.getElementById("title").style.visibility = "visible";	
+					 
 		var results = luck;
 		
 		var params= "results="+results;
@@ -234,6 +281,7 @@ var spinWheel = function() {
 			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.onload = function () {
                 console.log(this.responseText);
+				luck = "";
             }
             xhr.send(params);
         }
