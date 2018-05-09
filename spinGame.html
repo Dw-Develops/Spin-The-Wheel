@@ -48,6 +48,7 @@
 	
 	//Hide the spin button and spin invite title when the page loads
 	function hide() {
+	luck = "";
 	  document.getElementById("spin").style.visibility = "hidden"; 
 	  document.getElementById("results").style.visibility = "hidden"; 
 	  document.getElementById("title").style.visibility = "hidden"; 
@@ -99,10 +100,9 @@
 		'Prize 12!',
 		'Prize 13!'
 	];
-	  // Declare luck variable
-	    var luck = "";
 	    //Trigger function when the button is clicked -- Spin the wheel
-
+    var luck = "";
+	
 var spinWheel = function() {
         
     //Hide the Spin button so users can't multi press and impede app logic
@@ -223,7 +223,7 @@ var spinWheel = function() {
 
              //Post results data to the database
     		 function postResults() {
-		
+		     
 		
 		var results = luck;
 		
