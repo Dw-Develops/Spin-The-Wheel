@@ -1,0 +1,87 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Spin The Wheel</title>
+  <meta name="description" content="Spin The Wheel Game">
+  <meta name="Dw-Develops" content="Javascript Project">
+
+  
+  
+  <style>
+      body {
+  text-align: center;
+    }
+  </style>
+
+</head>
+
+<body>
+   
+    <h1>Spin a Wheel for Prizes!</h1>
+	
+	<iframe src="https://giphy.com/embed/nntpMqUaen7Nu" width="280" height="217" frameBorder="0" class="giphy-embed"></iframe><p><a href="https://giphy.com/gifs/spinning-nntpMqUaen7Nu">via GIPHY</a></p>
+
+<h2>Click Here to Spin the Wheel</h2>
+<button id='spin', onclick='spinWheel()'>Spin Now!</button>
+<h3 id='results'>Spin Results</h3>
+
+
+    <script>
+	
+	//Create an array of prizes
+	
+	var prizes = [
+	    'Prize 1!',
+		'Prize 2!',
+		'Prize 3!',
+		'Prize 4!',
+		'Prize 5!',
+		'Prize 6!',
+		'Prize 7!',
+		'Prize 8!',
+		'Prize 9!',
+		'Prize 10!',
+		'Prize 11!',
+		'Prize 12!',
+		'Prize 13!'
+	];
+	    //Trigger function when the button is clicked
+
+var spinWheel = function() {
+
+  //Create an Empty Variable thats local to this function
+  let num = "";
+  
+    //Generate random number
+   num = Math.floor(Math.random() *12 +1);
+     console.log(num);
+	 
+	
+    
+	//Loop through the array using a for loop
+	  for(i = 0; i < prizes.length && i !== num; i++) {
+	  
+	  //Set placeholder text so users know the game is working
+	  
+	    document.getElementById('results').innerHTML = "Spinning......";
+		
+		// Set a short timer to indicate that the wheel is spinning
+	      timer = setTimeout(winner, 3000);
+		}
+		
+	    
+			  //Display spin results
+			 function winner() {
+			  document.getElementById('results').innerHTML = "You Win " + prizes[i];   
+			  }
+}
+
+
+	</script>
+
+  
+</body>
+</html>
