@@ -1,10 +1,7 @@
 # Spin-The-Wheel
 A Simple Spin The Wheel For Prizes app built with Javascript
 
-Replace the numbered prize awards in each position in the array with the name of the prize. In addition, you can add more prize positions in the array by adding the prizes into the array and then changing the math.random statement to reflect the number of prize positions in your prizes array.
+The prize positions are awarded for spinning within pre set percentages so playing odds.
+Site bucks can be used for whatever you want. it's a simple cyber currency designed to be used for your requirements.
+You can use site bucks to give users a discount on your products or services by using the site bucks they won on your prize wheel.
 
-13 prize positions
-num = Math.floor(Math.random() *12 +1);
-
-50 prize positions
-num = Math.floor(Math.random() *49 +1);
