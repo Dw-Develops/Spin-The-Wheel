@@ -1,86 +1,9 @@
-<!doctype html>
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Spin The Wheel</title>
-  <meta name="description" content="Spin The Wheel Game">
-  <meta name="Dw-Develops" content="Javascript Project">
-
-      
-  
-  
-  <style>
-      body {
-  text-align: center;
-    }
-	
-	#bucks {
-	margin-left: 70%;
-	}
-	
-	#start {
-	
-	}
-  </style>
-
-</head>
-
-<audio id="sound1">
-  <source src="spinning_coin_2.mp3" type="audio/mp3">
-</audio>
-
-<audio id="sound2">
-  <source src="win.mp3" type="audio/mp3">
-</audio>
-
-<audio id="sound3">
-  <source src="lose.mp3" type="audio/mp3">
-</audio>
-
-<audio id="sound4">
-  <source src="yes.mp3" type="audio/mp3">
-</audio>
-
-<audio id="sound5">
-  <source src="ks.mp3" type="audio/mp3">
-</audio>
-
-
-<body onload='hide()'>
-   
-    <h1 id='t1'>Spin And Win With 100 Free Site Bucks!</h1>
-	<h3 id='bucks'>Site Bucks: </h3>
-	</h1>
-	
-	<h3 id="ui">1 Site Buck Per Play</h3>
-	<h2 id="showBonus"></h2>
-	
-	
-	<img src="prizeWheel2.GIF" width='300px' height='150px'><br>
-	<br>
-	<button id='start' onclick='start()'>Start</button>
-	
-	<h2 id='ui1'>Enter Your Email To Play!</h2>
-	<form id="postForm">
-	    <input type="text" name="email" id="email1">
-		<input type="submit" value="Submit" id='go'>
-
-	</form>
-	
-<h2 id='title'>Click Here to Spin the Wheel</h2>
-<button id='spin', onclick='spinWheel()'>Spin Now!</button>
-<h3 id='results'>Spin Results</h3>
-
-
-    <script>
-	/*
-	//Declare the audio file as a variable
+//Declare the audio file as a variable
 	var x = document.getElementById('sound1');
 	var y = document.getElementById('sound2');
 	var z = document.getElementById('sound3');
+	var yes = document.getElementById('sound4');
+	var ks = document.getElementById('sound5');
 	
 	//Hide the spin button and spin invite title when the page loads
 	function hide() {
@@ -88,7 +11,21 @@
 	  document.getElementById("spin").style.visibility = "hidden"; 
 	  document.getElementById("results").style.visibility = "hidden"; 
 	  document.getElementById("title").style.visibility = "hidden"; 
-	 
+	  document.getElementById("ui1").style.visibility = "hidden"; 
+	  document.getElementById("postForm").style.visibility = "hidden"; 
+	  document.getElementById("ui").style.visibility = "hidden"; 
+	  document.getElementById("bucks").style.visibility = "hidden"; 
+	  
+
+	}
+	
+	//click start button
+	function start() {
+		document.getElementById("ui1").style.visibility = "visible"; 
+	    document.getElementById("postForm").style.visibility = "visible"; 
+		document.getElementById("start").style.visibility = "hidden"; 
+		document.getElementById("ui").style.visibility = "visible"; 
+	    ks.play();
 	}
 	
 	//Form Logic
@@ -104,6 +41,7 @@
 		document.getElementById("title").style.visibility = "visible";
 		document.getElementById("ui1").style.visibility = "hidden"; 
 		document.getElementById("postForm").style.visibility = "hidden"; 
+	    document.getElementById("bucks").style.visibility = "visible";
 		
 		var email = document.getElementById('email1').value;
 		var params= "email="+email;
@@ -116,6 +54,7 @@
             }
             xhr.send(params);
 			 document.getElementById('bucks').innerHTML = "Site Bucks: " + siteBucks;
+			 document.getElementById('ui').innerHTML = "Congratulations! Here's 100 Free Site Bucks!";
         }
 
 	
@@ -155,14 +94,16 @@ var spinWheel = function() {
      console.log(num);
 	 
 	  
-		 if(num > 75) {
+		 if(num > 85) {
 		    bonus = true;
 		 } else if(num < 85) {
 		    bonus = false;
 		 } else {
 		 
 		 }
-	
+	    
+		//Pause idle game music
+		   ks.pause();
    
 	//Use if else statements to assign an array position to a 
 	//percentage of a generated random number (num)
@@ -261,6 +202,7 @@ var spinWheel = function() {
 				 siteBucks = siteBucks + luck;
 				 document.getElementById('showBonus').innerHTML = "Bonus Money!";
 				 document.getElementById('ui').innerHTML = siteBucks;
+				 yes.play();
 			 } else {
 			     siteBucks = siteBucks + luck;
 			 }
@@ -270,11 +212,13 @@ var spinWheel = function() {
 			       z.play();
 				   document.getElementById('ui').innerHTML = "You Lost " + luck + " Site Bucks!";
 			    } else if(luck > 1) {
-				
+				    if(bonus === true) {
+						yes.play();
+						document.getElementById('ui').innerHTML = "You Won " + luck + " Site Bucks!";
+					} else {
 				y.play();
 				document.getElementById('ui').innerHTML = "You Won " + luck + " Site Bucks!";
-				} 
-			   
+				} }
 			  
                 	
                     				
@@ -304,11 +248,3 @@ var spinWheel = function() {
             }
             xhr.send(params);
         }
-
-		*/
-	</script>
-
-	<script src="js/main.js"></script>
-  
-</body>
-</html>
